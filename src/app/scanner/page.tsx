@@ -7,6 +7,7 @@ import { Camera, CheckCircle2, XCircle, AlertCircle, RefreshCw, ScanLine, Users,
 import { AuroraBackground } from '@/components/AuroraBackground';
 
 type ScanStatus = 'idle' | 'loading' | 'success' | 'already_scanned' | 'invalid' | 'error';
+type Participant = { id: string, nama: string, email: string, status: string };
 
 export default function ScannerPage() {
   const [scanStatus, setScanStatus] = useState<ScanStatus>('idle');
@@ -17,7 +18,32 @@ export default function ScannerPage() {
   const [showManualInput, setShowManualInput] = useState(false);
   const [showParticipantInfo, setShowParticipantInfo] = useState(false);
   const [manualId, setManualId] = useState('');
+  const [participants, setParticipants] = useState<Participant[]>([]);
+  const [isLoadingParticipants, setIsLoadingParticipants] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
+
+  const fetchParticipants = async () => {
+    setIsLoadingParticipants(true);
+    try {
+      const response = await fetch('/api/participants', { method: 'POST' });
+      const result = await response.json();
+      if (result.status === 'success') {
+        setParticipants(result.participants || []);
+      } else {
+        console.error(result.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoadingParticipants(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showParticipantInfo) {
+      fetchParticipants();
+    }
+  }, [showParticipantInfo]);
 
   const processTicket = async (ticketId: string) => {
     if (ticketId === lastScannedId && scanStatus !== 'idle') return;
@@ -245,7 +271,7 @@ export default function ScannerPage() {
           </button>
         </div>
         
-        {/* Participant Info Modal */}
+        {/* Participant List Modal */}
         <AnimatePresence>
           {showParticipantInfo && (
             <motion.div 
@@ -258,22 +284,48 @@ export default function ScannerPage() {
                 initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 20 }}
-                className="bg-[#0C0C14] border border-white/10 p-8 rounded-3xl w-full max-w-sm shadow-2xl text-center relative overflow-hidden"
+                className="bg-[#0C0C14] border border-white/10 p-6 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden flex flex-col max-h-[80vh]"
               >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-600"></div>
-                <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-blue-500/20">
-                  <Users className="w-8 h-8 text-blue-400" />
+                <div className="flex items-center justify-between mb-6 shrink-0">
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Users className="w-6 h-6 text-yellow-500" />
+                    Daftar Peserta
+                  </h3>
+                  <button onClick={() => setShowParticipantInfo(false)} className="text-zinc-500 hover:text-white transition-colors bg-white/5 p-2 rounded-full">
+                    <XCircle className="w-6 h-6" />
+                  </button>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Akses Terbatas</h3>
-                <p className="text-zinc-400 text-sm mb-8 leading-relaxed">
-                  Demi keamanan dan privasi data, daftar peserta lengkap (Excel) hanya dapat diakses oleh Administrator Utama melalui Dashboard Server.
-                </p>
-                <button 
-                  onClick={() => setShowParticipantInfo(false)}
-                  className="w-full bg-white/10 text-white py-3.5 rounded-xl hover:bg-white/20 transition-colors font-medium shadow-lg"
-                >
-                  Tutup Peringatan
-                </button>
+                
+                <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-3">
+                  {isLoadingParticipants ? (
+                    <div className="flex flex-col items-center justify-center py-10">
+                      <RefreshCw className="w-8 h-8 text-yellow-500 animate-spin mb-3" />
+                      <p className="text-zinc-400 text-sm">Mengambil data...</p>
+                    </div>
+                  ) : participants.length === 0 ? (
+                    <div className="text-center py-10 text-zinc-500 text-sm">Belum ada peserta terdaftar.</div>
+                  ) : (
+                    participants.map((p, idx) => (
+                      <div key={idx} className="bg-white/5 border border-white/5 rounded-xl p-4 flex justify-between items-center">
+                        <div className="overflow-hidden">
+                          <p className="text-white font-medium truncate text-sm">{p.nama}</p>
+                          <p className="text-zinc-500 text-xs truncate">{p.email}</p>
+                        </div>
+                        <div className="ml-3 shrink-0">
+                          {p.status === 'Hadir' ? (
+                            <span className="bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-bold border border-emerald-500/30">
+                              Hadir
+                            </span>
+                          ) : (
+                            <span className="bg-white/5 text-zinc-400 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-medium border border-white/10">
+                              Antri
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
               </motion.div>
             </motion.div>
           )}

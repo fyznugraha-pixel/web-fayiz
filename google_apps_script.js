@@ -16,9 +16,11 @@ function doPost(e) {
     // Parsing data JSON yang dikirim dari form HTML/Next.js
     var data = JSON.parse(e.postData.contents);
     
-    // Cek action: jika "validate" jalankan validasi tiket, jika tidak maka registrasi
+    // Cek action: jika "validate" jalankan validasi tiket, jika "getParticipants" ambil data, jika tidak maka registrasi
     if (data.action === "validate") {
       return handleValidation(data);
+    } else if (data.action === "getParticipants") {
+      return handleGetParticipants();
     }
     
     return handleRegistration(data);
@@ -170,5 +172,51 @@ function handleRegistration(data) {
     "message": "Data dan file berhasil disimpan",
     "fileUrl": fileUrl,
     "ticketId": ticketId
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function handleGetParticipants() {
+  var sheetName = "Data Pendaftar Event";
+  var files = DriveApp.getFilesByName(sheetName);
+  
+  if (!files.hasNext()) {
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "error",
+      "message": "Database Spreadsheet belum dibuat"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var spreadsheet = SpreadsheetApp.open(files.next());
+  var sheet = spreadsheet.getActiveSheet();
+  var dataRange = sheet.getDataRange();
+  var values = dataRange.getValues();
+  
+  if (values.length <= 1) {
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "success",
+      "participants": []
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var headers = values[0];
+  var statusColIdx = headers.indexOf("Status Kehadiran");
+  
+  var participants = [];
+  for (var i = 1; i < values.length; i++) {
+    var row = values[i];
+    participants.push({
+      id: row[0] || "",
+      nama: row[2] || "",
+      email: row[3] || "",
+      status: statusColIdx !== -1 ? (row[statusColIdx] || "") : ""
+    });
+  }
+  
+  // Balik urutan agar pendaftar terbaru berada di atas
+  participants.reverse();
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    "status": "success",
+    "participants": participants
   })).setMimeType(ContentService.MimeType.JSON);
 }
