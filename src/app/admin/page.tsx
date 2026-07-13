@@ -100,7 +100,7 @@ export default function AdminPage() {
 
   return (
     <AuroraBackground className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="w-full max-w-[95%] xl:max-w-[1600px] mx-auto px-4 sm:px-6 py-12 relative z-10">
         
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
@@ -129,7 +129,7 @@ export default function AdminPage() {
                   <th className="p-4 whitespace-nowrap">Kontak</th>
                   <th className="p-4 whitespace-nowrap">Bukti TF</th>
                   <th className="p-4 whitespace-nowrap">Status</th>
-                  <th className="p-4 whitespace-nowrap text-right">Aksi</th>
+                  <th className="py-4 pl-4 pr-8 sm:pr-10 whitespace-nowrap text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-white/10">
@@ -185,7 +185,7 @@ export default function AdminPage() {
                           </span>
                         )}
                       </td>
-                      <td className="p-4 text-right">
+                      <td className="py-4 pl-4 pr-8 sm:pr-10 text-right">
                         {p.statusPembayaran !== 'Lunas' ? (
                           <button
                             onClick={() => handleVerifyAndSend(p)}
