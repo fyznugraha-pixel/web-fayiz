@@ -167,9 +167,10 @@ export default function TactlinkSupportSection({ noBackground = false, noDownloa
     <BorderGlow animated={!scannerMode} className="w-full">
       <div className="w-full flex flex-col bg-[#070713] p-3 rounded-3xl relative overflow-hidden border border-yellow-400/20 shadow-[0_0_20px_rgba(250,204,21,0.05)]">
         <div className="flex items-start justify-between w-full">
-          <div className="flex items-start gap-3">
-            <div className="h-12 w-12 sm:h-14 sm:w-14 bg-white rounded-xl p-1.5 flex shrink-0 shadow-lg items-center justify-center">
-              <Image src={assetPath("/logo/tactlink.png")} alt="Tactlink" width={100} height={100} className="h-full w-full object-contain" />
+          <div className="flex items-start gap-4">
+            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-white/5 backdrop-blur-xl rounded-2xl p-2.5 flex shrink-0 shadow-[0_8px_32px_rgba(250,204,21,0.15)] border border-white/10 items-center justify-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <Image src={assetPath("/logo/tactlink.png")} alt="Tactlink" width={150} height={150} className="h-full w-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[7px] text-yellow-300 font-bold uppercase tracking-wider mb-0.5">
@@ -226,13 +227,14 @@ export default function TactlinkSupportSection({ noBackground = false, noDownloa
             </p>
 
             <div className={`flex flex-col gap-4 sm:flex-row sm:items-center ${noBackground ? '' : 'gap-6'}`}>
-              <div className={`flex shrink-0 items-center justify-center rounded-2xl bg-white p-2.5 shadow-xl ${noBackground ? 'h-16 w-16' : 'h-28 w-28 sm:h-32 sm:w-32'}`}>
+              <div className={`flex shrink-0 items-center justify-center rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_40px_rgba(250,204,21,0.15)] p-4 relative overflow-hidden group ${noBackground ? 'h-24 w-24' : 'h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48'}`}>
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 <Image
                   src={assetPath("/logo/tactlink.png")}
                   alt="Tactlink"
-                  width={180}
-                  height={180}
-                  className="h-full w-full object-contain"
+                  width={300}
+                  height={300}
+                  className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                   priority
                 />
               </div>
