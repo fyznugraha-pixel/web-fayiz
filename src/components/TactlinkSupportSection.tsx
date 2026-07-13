@@ -165,48 +165,48 @@ export default function TactlinkSupportSection({ noBackground = false, noDownloa
 
   const compactLayout = (
     <BorderGlow animated={!scannerMode} className="w-full">
-      <div className="w-full flex flex-col bg-[#070713] p-3 rounded-3xl relative overflow-hidden border border-yellow-400/20 shadow-[0_0_20px_rgba(250,204,21,0.05)]">
+      <div className="w-full flex flex-col bg-white p-3 rounded-3xl relative overflow-hidden border border-slate-200 shadow-sm">
         <div className="flex items-start justify-between w-full">
           <div className="flex items-start gap-4">
-            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-white/5 backdrop-blur-xl rounded-2xl p-2.5 flex shrink-0 shadow-[0_8px_32px_rgba(250,204,21,0.15)] border border-white/10 items-center justify-center relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-              <Image src={assetPath("/logo/tactlink.png")} alt="Tactlink" width={150} height={150} className="h-full w-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
+            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-slate-50 rounded-2xl p-2.5 flex shrink-0 shadow-sm border border-slate-200 items-center justify-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/50 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <Image src={assetPath("/logo/tactlink.png")} alt="Tactlink" width={150} height={150} className="h-full w-full object-contain" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[7px] text-yellow-300 font-bold uppercase tracking-wider mb-0.5">
+              <p className="text-[7px] text-yellow-500 font-bold uppercase tracking-wider mb-0.5">
                 {language === "en" ? "Website Supported By" : "Situs Web Didukung Oleh"}
               </p>
-              <h2 className="text-[11px] sm:text-xs font-black leading-tight text-white">
+              <h2 className="text-[11px] sm:text-xs font-black leading-tight text-slate-900">
                 {language === "en" ? "Connect smarter with" : "Terhubung dengan"}{" "}
-                <span className="text-yellow-400">Tactlink</span>
+                <span className="text-yellow-500">Tactlink</span>
               </h2>
-              <p className="text-[8px] sm:text-[9px] text-white/50 leading-[1.3] mt-1 max-w-[200px]">
+              <p className="text-[8px] sm:text-[9px] text-slate-500 leading-[1.3] mt-1 max-w-[200px]">
                 {language === "en" 
                   ? "This official website is supported by Tactlink. Download the app to experience smarter digital networking." 
                   : "Situs web ini didukung oleh Tactlink. Unduh aplikasi untuk merasakan jaringan digital cerdas."}
               </p>
               
               <div className="flex flex-wrap gap-2 mt-2.5">
-                <a href={tactlinkLinks.appStore} target="_blank" rel="noopener noreferrer" className="flex items-center bg-white rounded-lg px-2 py-1 h-7 hover:bg-yellow-300 transition">
+                <a href={tactlinkLinks.appStore} target="_blank" rel="noopener noreferrer" className="flex items-center bg-slate-100 rounded-lg px-2 py-1 h-7 hover:bg-yellow-100 transition border border-slate-200">
                   <div className="h-4 w-4 mr-1 text-black flex items-center justify-center"><AppleIcon /></div>
-                  <div className="text-left leading-none"><p className="text-[5px] font-bold text-black/60 uppercase">Download on the</p><p className="text-[7px] font-black text-black">App Store</p></div>
+                  <div className="text-left leading-none"><p className="text-[5px] font-bold text-slate-500 uppercase">Download on the</p><p className="text-[7px] font-black text-slate-900">App Store</p></div>
                 </a>
-                <a href={tactlinkLinks.playStore} target="_blank" rel="noopener noreferrer" className="flex items-center bg-white rounded-lg px-2 py-1 h-7 hover:bg-yellow-300 transition">
+                <a href={tactlinkLinks.playStore} target="_blank" rel="noopener noreferrer" className="flex items-center bg-slate-100 rounded-lg px-2 py-1 h-7 hover:bg-yellow-100 transition border border-slate-200">
                   <div className="h-4 w-4 mr-1 flex items-center justify-center"><PlayStoreIcon /></div>
-                  <div className="text-left leading-none"><p className="text-[5px] font-bold text-black/60 uppercase">Get it on</p><p className="text-[7px] font-black text-black">Google Play</p></div>
+                  <div className="text-left leading-none"><p className="text-[5px] font-bold text-slate-500 uppercase">Get it on</p><p className="text-[7px] font-black text-slate-900">Google Play</p></div>
                 </a>
               </div>
             </div>
           </div>
           
-          <a href={tactlinkLinks.website} target="_blank" rel="noopener noreferrer" className="shrink-0 flex items-center justify-center h-6 px-2.5 rounded-full bg-white/10 border border-white/20 text-[8px] font-bold text-white hover:bg-white/20 transition ml-2 mt-1">
+          <a href={tactlinkLinks.website} target="_blank" rel="noopener noreferrer" className="shrink-0 flex items-center justify-center h-6 px-2.5 rounded-full bg-slate-100 border border-slate-200 text-[8px] font-bold text-slate-700 hover:bg-slate-200 transition ml-2 mt-1">
             Visit <ExternalLink size={8} className="ml-1" />
           </a>
         </div>
         
-        <div className="flex items-center gap-2 mt-3 pt-2 border-t border-white/10 text-[7.5px] text-white/50 font-bold">
+        <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100 text-[7.5px] text-slate-400 font-bold">
             <p>{language === "en" ? "10,000+ Cards Shared" : "10.000+ Kartu Dibagikan"}</p>
-            <div className="h-1 w-1 bg-white/20 rounded-full" />
+            <div className="h-1 w-1 bg-slate-200 rounded-full" />
             <p className="flex items-center gap-1"><Globe2 size={8} /> {language === "en" ? "Available in 8 Countries" : "Tersedia di 8 Negara"}</p>
         </div>
       </div>
@@ -219,48 +219,39 @@ export default function TactlinkSupportSection({ noBackground = false, noDownloa
 
   const desktopLayout = (
     <BorderGlow className="w-full">
-      <div className={`w-full overflow-hidden rounded-[2rem] ${noBackground ? 'p-5 md:p-6' : 'p-4 md:p-6 md:p-8 lg:p-4 md:p-6 md:p-10'}`}>
+      <div className={`w-full overflow-hidden rounded-[2rem] bg-white border border-slate-200 shadow-sm ${noBackground ? 'p-5 md:p-6 bg-transparent border-none shadow-none' : 'p-4 md:p-6 md:p-8 lg:p-4 md:p-6 md:p-10'}`}>
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className={`inline-flex rounded-full border border-yellow-300/20 bg-yellow-400/10 font-black uppercase tracking-[0.22em] text-yellow-300 ${noBackground ? 'mb-3 px-2 py-1 text-[8px]' : 'mb-4 px-3 py-1.5 text-xs'}`}>
+            <p className={`inline-flex rounded-full border border-yellow-500/20 bg-yellow-50 font-black uppercase tracking-[0.22em] text-yellow-600 ${noBackground ? 'mb-3 px-2 py-1 text-[8px]' : 'mb-4 px-3 py-1.5 text-xs'}`}>
               {language === "en" ? "Website Supported By" : "Situs Web Didukung Oleh"}
             </p>
 
             <div className={`flex flex-col gap-4 sm:flex-row sm:items-center ${noBackground ? '' : 'gap-6'}`}>
-              <div className={`flex shrink-0 items-center justify-center rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_40px_rgba(250,204,21,0.15)] p-4 relative overflow-hidden group ${noBackground ? 'h-24 w-24' : 'h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48'}`}>
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <div className={`flex shrink-0 items-center justify-center rounded-3xl bg-slate-50 border border-slate-200 shadow-sm p-4 relative overflow-hidden group ${noBackground ? 'h-24 w-24' : 'h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48'}`}>
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/50 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 <Image
                   src={assetPath("/logo/tactlink.png")}
                   alt="Tactlink"
                   width={300}
                   height={300}
-                  className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                  className="h-full w-full object-contain"
                   priority
                 />
               </div>
 
               <div className="min-w-0">
-                <h2 className={`font-black leading-tight ${noBackground ? 'text-lg md:text-xl' : 'max-w-3xl text-3xl md:text-3xl md:text-3xl md:text-4xl lg:text-3xl md:text-5xl'}`}>
+                <h2 className={`font-black leading-tight text-slate-900 ${noBackground ? 'text-lg md:text-xl' : 'max-w-3xl text-3xl md:text-3xl md:text-3xl md:text-4xl lg:text-3xl md:text-5xl'}`}>
                   {language === "en" ? "Connect smarter with" : "Terhubung lebih cerdas dengan"}{" "}
-                  <span className="text-yellow-400">Tactlink</span>
+                  <span className="text-yellow-500">Tactlink</span>
                 </h2>
 
-                <p className={`mt-2 max-w-2xl text-white/60 ${noBackground ? 'text-xs leading-5' : 'leading-8'}`}>
+                <p className={`mt-2 max-w-2xl text-slate-500 ${noBackground ? 'text-xs leading-5' : 'leading-8 text-sm sm:text-base'}`}>
                   {language === "en"
                     ? "This official website is supported by Tactlink. Download the app to experience smarter digital networking and digital business cards."
                     : "Situs web resmi ini didukung oleh Tactlink. Unduh aplikasi untuk merasakan jaringan digital dan kartu nama bisnis digital yang lebih cerdas."}
                 </p>
               </div>
             </div>
-          </div>
-
-          <a
-            href={tactlinkLinks.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-white/10 font-black text-white transition hover:bg-white/15 hover:text-yellow-300 ${noBackground ? 'px-4 py-2 text-xs' : 'px-6 py-4'}`}
-          >
-            {language === "en" ? "Visit Tactlink" : "Kunjungi Tactlink"}
             <ExternalLink size={noBackground ? 14 : 16} />
           </a>
         </div>

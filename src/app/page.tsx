@@ -177,10 +177,10 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading leading-tight mb-8 font-bold">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading leading-tight mb-8 font-bold text-slate-900">
               Bongkar Rahasia Cuan Lewat <br/>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mt-2">
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 text-white">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 text-slate-900">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                 </svg>
                 <ShinyText text="TikTok Social" className="text-5xl lg:text-6xl" />
@@ -188,53 +188,53 @@ export default function Home() {
               </div>
             </h1>
 
-            <div className="glass-card rounded-3xl p-6 md:p-8 space-y-6 mb-10">
+            <div className="bg-white/80 backdrop-blur-xl border border-slate-200 shadow-xl rounded-3xl p-6 md:p-8 space-y-6 mb-10">
               <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-primary/20 transition-colors border border-white/5">
+                <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-primary/10 transition-colors border border-slate-100 shadow-sm">
                   <Calendar className="text-primary w-6 h-6 flex-shrink-0" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg text-white">Tanggal & Waktu</h3>
-                  <p className="text-text-muted mt-1">Kamis, 23 Juli 2026 <br/> 09.00 WIB - Selesai</p>
+                  <h3 className="font-semibold text-lg text-slate-900">Tanggal & Waktu</h3>
+                  <p className="text-slate-500 mt-1">Kamis, 23 Juli 2026 <br/> 09.00 WIB - Selesai</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-secondary/20 transition-colors border border-white/5">
+                <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-secondary/10 transition-colors border border-slate-100 shadow-sm">
                   <MapPin className="text-secondary w-6 h-6 flex-shrink-0" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg text-white">Lokasi</h3>
-                  <p className="text-text-muted mt-1">Gedung Sate<br/>Jl. Diponegoro No.22, Bandung</p>
+                  <h3 className="font-semibold text-lg text-slate-900">Lokasi</h3>
+                  <p className="text-slate-500 mt-1">Gedung Sate<br/>Jl. Diponegoro No.22, Bandung</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-primary/20 transition-colors border border-white/5">
+                <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-primary/10 transition-colors border border-slate-100 shadow-sm">
                   <svg viewBox="0 0 24 24" fill="currentColor" className="text-primary w-6 h-6 flex-shrink-0">
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg text-white">Pembicara Utama</h3>
-                  <p className="text-text-muted mt-1">Tim TikTok Official Indonesia</p>
+                  <h3 className="font-semibold text-lg text-slate-900">Pembicara Utama</h3>
+                  <p className="text-slate-500 mt-1">Tim TikTok Official Indonesia</p>
                 </div>
               </div>
             </div>
 
-            <h3 className="text-xl font-heading font-semibold mb-4 text-white flex items-center gap-2">
+            <h3 className="text-xl font-heading font-semibold mb-4 text-slate-900 flex items-center gap-2">
               <Ticket className="w-5 h-5 text-primary" /> Investasi
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="glass-card rounded-2xl p-5 border-white/10 hover:border-primary/30 transition-colors">
-                <h4 className="font-medium mb-1 text-text-muted text-sm uppercase tracking-wider">Perorangan</h4>
-                <p className="font-heading font-bold text-3xl text-white">Rp 75.000</p>
+              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-5 border border-slate-200 hover:border-primary/50 transition-colors shadow-lg">
+                <h4 className="font-medium mb-1 text-slate-500 text-sm uppercase tracking-wider">Perorangan</h4>
+                <p className="font-heading font-bold text-3xl text-slate-900">Rp 75.000</p>
               </div>
               <SpotlightCard className="p-5">
                 <div className="relative z-10">
                   <h4 className="font-medium mb-1 text-primary text-sm uppercase tracking-wider">Kelompok (5 Org)</h4>
-                  <p className="font-heading font-bold text-3xl text-white">Rp 250.000</p>
-                  <p className="text-xs text-primary/80 mt-1 font-medium tracking-wide">HEMAT RP 125.000</p>
+                  <p className="font-heading font-bold text-3xl text-slate-900">Rp 250.000</p>
+                  <p className="text-xs text-primary mt-1 font-bold tracking-wide">HEMAT RP 125.000</p>
                 </div>
               </SpotlightCard>
             </div>
@@ -247,7 +247,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <div className="glass-card rounded-[2rem] p-6 sm:p-8 md:p-12 relative overflow-hidden">
+            <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/60 shadow-2xl rounded-[2rem] p-6 sm:p-8 md:p-12 relative overflow-hidden">
               <AnimatePresence mode="wait">
                 {status === "success" ? (
                   <motion.div 
@@ -256,9 +256,9 @@ export default function Home() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center text-center py-10 sm:py-16"
                   >
-                    <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-2 text-white">Pendaftaran Berhasil!</h2>
-                    <p className="text-base sm:text-lg text-zinc-200 max-w-md mb-8 leading-relaxed">
-                      E-Ticket telah dikirim ke <strong className="text-white">{userEmail}</strong>. Tunjukkan QR Code di bawah ini saat registrasi ulang di lokasi.
+                    <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-2 text-slate-900">Pendaftaran Berhasil!</h2>
+                    <p className="text-base sm:text-lg text-slate-600 max-w-md mb-8 leading-relaxed">
+                      E-Ticket telah dikirim ke <strong className="text-slate-900">{userEmail}</strong>. Tunjukkan QR Code di bawah ini saat registrasi ulang di lokasi.
                     </p>
                     
                     {ticketId && (
@@ -273,7 +273,7 @@ export default function Home() {
                       </motion.div>
                     )}
                     
-                    <p className="text-sm text-zinc-400 mt-2">
+                    <p className="text-sm text-slate-400 mt-2">
                       Screenshot QR Code ini sebagai cadangan tiket Anda.
                     </p>
                   </motion.div>
@@ -282,14 +282,14 @@ export default function Home() {
                     key="form"
                     exit={{ opacity: 0, filter: "blur(10px)" }}
                   >
-                    <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-3 text-white">Amankan Kursimu</h2>
-                    <p className="text-text-muted mb-8 text-base">Isi detail di bawah untuk mengonfirmasi kehadiran Anda.</p>
+                    <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-3 text-slate-900">Amankan Kursimu</h2>
+                    <p className="text-slate-500 mb-8 text-base">Isi detail di bawah untuk mengonfirmasi kehadiran Anda.</p>
 
                     {status === "error" && (
                       <motion.div 
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl mb-6 text-sm flex items-center gap-2"
+                        className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl mb-6 text-sm flex items-center gap-2"
                       >
                         <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
                         Terjadi kesalahan saat mengirim data. Silakan coba lagi.
@@ -298,52 +298,52 @@ export default function Home() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div className="space-y-1.5">
-                        <label className="text-sm font-medium text-zinc-300 ml-1">Nama Lengkap Sesuai KTP <span className="text-secondary">*</span></label>
+                        <label className="text-sm font-medium text-slate-700 ml-1">Nama Lengkap Sesuai KTP <span className="text-secondary">*</span></label>
                         <input type="text" name="fullName" required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: Fayiz Apriwansyah" />
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="space-y-1.5">
-                          <label className="text-sm font-medium text-zinc-300 ml-1">Alamat Email <span className="text-secondary">*</span></label>
+                          <label className="text-sm font-medium text-slate-700 ml-1">Alamat Email <span className="text-secondary">*</span></label>
                           <input type="email" name="email" required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: fyznugraha@email.com" />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-sm font-medium text-zinc-300 ml-1">No. WhatsApp Aktif <span className="text-secondary">*</span></label>
+                          <label className="text-sm font-medium text-slate-700 ml-1">No. WhatsApp Aktif <span className="text-secondary">*</span></label>
                           <input type="tel" name="whatsapp" required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: 087794693241" />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="space-y-1.5">
-                          <label className="text-sm font-medium text-zinc-300 ml-1">Username TikTok <span className="text-secondary">*</span></label>
+                          <label className="text-sm font-medium text-slate-700 ml-1">Username TikTok <span className="text-secondary">*</span></label>
                           <input type="text" name="tiktokUsername" required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: @faizngraha" />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-sm font-medium text-zinc-300 ml-1">Jumlah Followers <span className="text-secondary">*</span></label>
+                          <label className="text-sm font-medium text-slate-700 ml-1">Jumlah Followers <span className="text-secondary">*</span></label>
                           <input type="number" name="followers" required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: 1500" />
                         </div>
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-sm font-medium text-zinc-300 ml-1">Link Akun TikTok <span className="text-secondary">*</span></label>
+                        <label className="text-sm font-medium text-slate-700 ml-1">Link Akun TikTok <span className="text-secondary">*</span></label>
                         <input type="url" name="tiktokLink" required className="w-full glass-input px-4 py-3.5" placeholder="https://tiktok.com/@faizngraha" />
                       </div>
 
-                      <div className="pt-4 mt-8 border-t border-white/10">
-                        <h3 className="text-lg font-heading font-semibold mb-4 text-white">Verifikasi Pembayaran</h3>
+                      <div className="pt-4 mt-8 border-t border-slate-200">
+                        <h3 className="text-lg font-heading font-semibold mb-4 text-slate-900">Verifikasi Pembayaran</h3>
                         
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                           <div>
-                            <p className="text-sm text-text-muted mb-1">Bank Mandiri</p>
-                            <p className="font-heading text-xl font-bold text-white tracking-widest">130 00 295 04845</p>
+                            <p className="text-sm text-slate-500 mb-1">Bank Mandiri</p>
+                            <p className="font-heading text-xl font-bold text-slate-900 tracking-widest">130 00 295 04845</p>
                             <p className="text-sm font-medium text-primary mt-1">a.n NANI SUMARNI</p>
                           </div>
-                          <div className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-semibold border border-primary/20">
+                          <div className="px-4 py-2 bg-primary/10 text-primary-dark rounded-lg text-sm font-semibold border border-primary/20">
                             Transfer Resmi
                           </div>
                         </div>
 
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-zinc-300 ml-1">Upload Bukti Screenshot <span className="text-secondary">*</span></label>
+                          <label className="text-sm font-medium text-slate-700 ml-1">Upload Bukti Screenshot <span className="text-secondary">*</span></label>
                           <div className="relative group">
                             <input 
                               type="file" 
@@ -354,17 +354,17 @@ export default function Home() {
                               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
                             />
                             <div className={`w-full border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 flex flex-col items-center justify-center gap-3
-                              ${fileName ? 'border-primary bg-primary/5' : 'border-white/20 bg-white/5 group-hover:border-primary/50 group-hover:bg-white/10'}`}>
+                              ${fileName ? 'border-primary bg-primary/5' : 'border-slate-300 bg-slate-50 group-hover:border-primary/50 group-hover:bg-slate-100'}`}>
                               
-                              <div className={`p-3 rounded-full transition-colors ${fileName ? 'bg-primary/20 text-primary' : 'bg-white/10 text-zinc-400 group-hover:text-primary'}`}>
+                              <div className={`p-3 rounded-full transition-colors ${fileName ? 'bg-primary/20 text-primary-dark' : 'bg-slate-200 text-slate-500 group-hover:text-primary-dark'}`}>
                                 {fileName ? <CheckCircle className="w-6 h-6" /> : <Upload className="w-6 h-6" />}
                               </div>
                               
                               <div>
-                                <p className="font-medium text-white mb-1">
+                                <p className="font-medium text-slate-900 mb-1">
                                   {fileName ? fileName : 'Klik atau seret file ke sini'}
                                 </p>
-                                <p className="text-xs text-text-muted">
+                                <p className="text-xs text-slate-500">
                                   Format: JPG, PNG (Maks. 2MB)
                                 </p>
                               </div>
@@ -376,12 +376,12 @@ export default function Home() {
                       <button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="w-full mt-8 bg-white text-black hover:bg-zinc-200 font-bold py-4 px-6 rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2 group relative overflow-hidden"
+                        className="w-full mt-8 bg-slate-900 text-white hover:bg-slate-800 font-bold py-4 px-6 rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2 group relative overflow-hidden shadow-lg"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
                         {isSubmitting ? (
                           <>
-                            <Loader2 className="w-5 h-5 animate-spin text-black" />
+                            <Loader2 className="w-5 h-5 animate-spin text-white" />
                             Memproses Data...
                           </>
                         ) : (
@@ -389,16 +389,16 @@ export default function Home() {
                         )}
                       </button>
 
-                      <div className="mt-8 flex flex-col items-center justify-center gap-2 border-t border-white/10 pt-6">
-                        <p className="text-zinc-400 text-sm">Butuh bantuan pendaftaran? Hubungi:</p>
+                      <div className="mt-8 flex flex-col items-center justify-center gap-2 border-t border-slate-200 pt-6">
+                        <p className="text-slate-500 text-sm">Butuh bantuan pendaftaran? Hubungi:</p>
                         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-                          <a href="https://wa.me/6285603500816" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-300 hover:text-primary transition-colors flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-primary/50 shadow-[0_0_10px_rgba(0,242,254,0.5)]"></span>
-                            Avi: <span className="font-bold text-white">0856-0350-0816</span>
+                          <a href="https://wa.me/6285603500816" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-600 hover:text-primary-dark transition-colors flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(0,242,254,0.5)]"></span>
+                            Avi: <span className="font-bold text-slate-900">0856-0350-0816</span>
                           </a>
-                          <a href="https://wa.me/6282126169071" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-300 hover:text-secondary transition-colors flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-secondary/50 shadow-[0_0_10px_rgba(254,9,121,0.5)]"></span>
-                            Fitri: <span className="font-bold text-white">0821-2616-9071</span>
+                          <a href="https://wa.me/6282126169071" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-600 hover:text-secondary transition-colors flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(254,9,121,0.5)]"></span>
+                            Fitri: <span className="font-bold text-slate-900">0821-2616-9071</span>
                           </a>
                         </div>
                       </div>

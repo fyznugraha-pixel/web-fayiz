@@ -5,13 +5,13 @@
   --color-primary: #00f2fe;     /* TikTok Cyan */
   --color-primary-dark: #00c6d4;
   --color-secondary: #fe0979;   /* TikTok Magenta */
-  --color-cta: #ffffff;
-  --color-cta-hover: #f1f5f9;
+  --color-cta: #0f172a;
+  --color-cta-hover: #1e293b;
   
-  --color-background: #09090b;  /* Slate 950 / Deep Black */
-  --color-surface: #18181b;     /* Zinc 900 */
-  --color-text-primary: #fafafa;
-  --color-text-muted: #a1a1aa;
+  --color-background: #f8fafc;  /* Slate 50 */
+  --color-surface: #ffffff;     /* White */
+  --color-text-primary: #0f172a; /* Slate 900 */
+  --color-text-muted: #475569;   /* Slate 600 */
   
   --font-heading: "Space Grotesk", sans-serif;
   --font-body: "Plus Jakarta Sans", sans-serif;

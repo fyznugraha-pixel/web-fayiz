@@ -132,22 +132,21 @@ export default function ScannerPage() {
 
   return (
     <AuroraBackground className="bg-[#070713] flex flex-col items-center justify-center p-4 sm:p-8 min-h-screen">
-      <div className="relative z-10 w-full max-w-sm mx-auto">
-        
-        {/* Header Dashboard */}
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-heading font-bold text-white flex items-center gap-2">
-              <ScanLine className="w-6 h-6 text-yellow-500" />
-              Scanner Area
-            </h1>
-            <p className="text-zinc-400 text-sm mt-1">Sistem Validasi Tiket Cepat</p>
+        <div className="bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 sm:p-8 relative overflow-hidden w-full max-w-sm">
+          {/* Header */}
+          <div className="flex justify-between items-start mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-1">
+                <ScanLine className="w-6 h-6 text-primary" />
+                Scanner Area
+              </h2>
+              <p className="text-sm text-slate-500">Scan QR Code e-Ticket peserta</p>
+            </div>
+            <div className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-2xl flex flex-col items-center shadow-sm">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mb-0.5">Hadir</span>
+              <span className="text-2xl font-black text-slate-900 leading-none">{scannedCount}</span>
+            </div>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl px-4 py-2 flex flex-col items-center justify-center shadow-lg">
-            <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold mb-0.5">Hadir</span>
-            <span className="text-xl font-black text-yellow-500 leading-none">{scannedCount}</span>
-          </div>
-        </div>
 
         {/* Main Camera / Placeholder View */}
         <div className="rounded-[2rem] overflow-hidden border border-white/10 bg-[#0C0C14] shadow-2xl relative">
@@ -169,7 +168,7 @@ export default function ScannerPage() {
                 </p>
                 <button
                   onClick={startScanner}
-                  className="bg-white text-black font-bold px-8 py-4 rounded-xl hover:bg-zinc-200 transition-all shadow-lg active:scale-95 w-full"
+                  className="bg-slate-900 text-white font-bold px-8 py-4 rounded-xl hover:bg-slate-800 transition-all shadow-lg active:scale-95 w-full"
                 >
                   Buka Kamera
                 </button>
@@ -205,45 +204,45 @@ export default function ScannerPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 backdrop-blur-md bg-black/60"
+                  className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 backdrop-blur-md bg-white/60"
                 >
                   {scanStatus === 'loading' && (
-                    <div className="bg-zinc-900 border border-white/10 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-2xl">
-                      <RefreshCw className="w-16 h-16 text-yellow-500 animate-spin mb-4" />
-                      <h3 className="text-xl font-bold text-white">Memvalidasi...</h3>
+                    <div className="bg-white border border-slate-200 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-2xl">
+                      <RefreshCw className="w-16 h-16 text-primary animate-spin mb-4" />
+                      <h3 className="text-xl font-bold text-slate-900">Memvalidasi...</h3>
                     </div>
                   )}
                   
                   {scanStatus === 'success' && (
-                    <div className="bg-emerald-950 border border-emerald-500/50 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-[0_0_50px_rgba(16,185,129,0.3)]">
-                      <CheckCircle2 className="w-20 h-20 text-emerald-400 mb-4 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
-                      <h3 className="text-2xl font-bold text-white mb-2">Akses Diterima</h3>
-                      <p className="text-emerald-200 text-lg">{scannedName}</p>
+                    <div className="bg-emerald-50 border border-emerald-200 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-[0_0_50px_rgba(16,185,129,0.15)]">
+                      <CheckCircle2 className="w-20 h-20 text-emerald-500 mb-4 drop-shadow-md" />
+                      <h3 className="text-2xl font-bold text-emerald-800 mb-2">Akses Diterima</h3>
+                      <p className="text-emerald-600 text-lg font-medium">{scannedName}</p>
                     </div>
                   )}
 
                   {scanStatus === 'already_scanned' && (
-                    <div className="bg-amber-950 border border-amber-500/50 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-[0_0_50px_rgba(245,158,11,0.3)]">
-                      <AlertCircle className="w-20 h-20 text-amber-400 mb-4 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]" />
-                      <h3 className="text-2xl font-bold text-white mb-2">Sudah Digunakan</h3>
-                      <p className="text-amber-200 text-lg mb-1">{scannedName}</p>
-                      <p className="text-zinc-400 text-sm">Tiket ini sudah di-scan sebelumnya.</p>
+                    <div className="bg-amber-50 border border-amber-200 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-[0_0_50px_rgba(245,158,11,0.15)]">
+                      <AlertCircle className="w-20 h-20 text-amber-500 mb-4 drop-shadow-md" />
+                      <h3 className="text-2xl font-bold text-amber-800 mb-2">Sudah Digunakan</h3>
+                      <p className="text-amber-700 text-lg mb-1 font-medium">{scannedName}</p>
+                      <p className="text-amber-600/70 text-sm">Tiket ini sudah di-scan sebelumnya.</p>
                     </div>
                   )}
 
                   {scanStatus === 'invalid' && (
-                    <div className="bg-red-950 border border-red-500/50 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-[0_0_50px_rgba(239,68,68,0.3)]">
-                      <XCircle className="w-20 h-20 text-red-400 mb-4 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
-                      <h3 className="text-2xl font-bold text-white mb-2">Tiket Palsu</h3>
-                      <p className="text-red-200 text-sm">QR Code tidak terdaftar dalam database.</p>
+                    <div className="bg-red-50 border border-red-200 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-[0_0_50px_rgba(239,68,68,0.15)]">
+                      <XCircle className="w-20 h-20 text-red-500 mb-4 drop-shadow-md" />
+                      <h3 className="text-2xl font-bold text-red-800 mb-2">Tiket Palsu</h3>
+                      <p className="text-red-600 text-sm font-medium">QR Code tidak terdaftar dalam database.</p>
                     </div>
                   )}
 
                   {scanStatus === 'error' && (
-                    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-3xl flex flex-col items-center text-center w-full">
-                      <XCircle className="w-16 h-16 text-zinc-400 mb-4" />
-                      <h3 className="text-xl font-bold text-white mb-2">Koneksi Gagal</h3>
-                      <p className="text-zinc-400 text-sm">Periksa koneksi internet Anda.</p>
+                    <div className="bg-white border border-slate-200 p-8 rounded-3xl flex flex-col items-center text-center w-full shadow-2xl">
+                      <XCircle className="w-16 h-16 text-slate-400 mb-4" />
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">Koneksi Gagal</h3>
+                      <p className="text-slate-500 text-sm">Periksa koneksi internet Anda.</p>
                     </div>
                   )}
                 </motion.div>
@@ -257,16 +256,16 @@ export default function ScannerPage() {
         <div className="mt-6 grid grid-cols-2 gap-3">
           <button 
             onClick={() => setShowParticipantInfo(true)}
-            className="bg-white/5 border border-white/10 text-white font-medium py-3.5 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm shadow-lg"
+            className="bg-white/80 backdrop-blur-md border border-slate-200 text-slate-700 font-medium py-3.5 rounded-xl hover:bg-white transition-colors flex items-center justify-center gap-2 text-sm shadow-sm"
           >
-            <Users className="w-4 h-4 text-zinc-400" />
+            <Users className="w-4 h-4 text-slate-500" />
             Daftar Peserta
           </button>
           <button 
             onClick={() => setShowManualInput(true)}
-            className="bg-white/5 border border-white/10 text-white font-medium py-3.5 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm shadow-lg"
+            className="bg-white/80 backdrop-blur-md border border-slate-200 text-slate-700 font-medium py-3.5 rounded-xl hover:bg-white transition-colors flex items-center justify-center gap-2 text-sm shadow-sm"
           >
-            <Keyboard className="w-4 h-4 text-zinc-400" />
+            <Keyboard className="w-4 h-4 text-slate-500" />
             Input Manual
           </button>
         </div>
@@ -278,20 +277,20 @@ export default function ScannerPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/60 backdrop-blur-sm"
             >
               <motion.div 
                 initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 20 }}
-                className="bg-[#0C0C14] border border-white/10 p-6 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden flex flex-col max-h-[80vh]"
+                className="bg-white border border-slate-200 p-6 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden flex flex-col max-h-[80vh]"
               >
                 <div className="flex items-center justify-between mb-6 shrink-0">
-                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                    <Users className="w-6 h-6 text-yellow-500" />
+                  <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <Users className="w-6 h-6 text-primary" />
                     Daftar Peserta
                   </h3>
-                  <button onClick={() => setShowParticipantInfo(false)} className="text-zinc-500 hover:text-white transition-colors bg-white/5 p-2 rounded-full">
+                  <button onClick={() => setShowParticipantInfo(false)} className="text-slate-400 hover:text-slate-900 transition-colors bg-slate-50 p-2 rounded-full border border-slate-200">
                     <XCircle className="w-6 h-6" />
                   </button>
                 </div>
@@ -299,25 +298,25 @@ export default function ScannerPage() {
                 <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-3">
                   {isLoadingParticipants ? (
                     <div className="flex flex-col items-center justify-center py-10">
-                      <RefreshCw className="w-8 h-8 text-yellow-500 animate-spin mb-3" />
-                      <p className="text-zinc-400 text-sm">Mengambil data...</p>
+                      <RefreshCw className="w-8 h-8 text-primary animate-spin mb-3" />
+                      <p className="text-slate-500 text-sm">Mengambil data...</p>
                     </div>
                   ) : participants.length === 0 ? (
-                    <div className="text-center py-10 text-zinc-500 text-sm">Belum ada peserta terdaftar.</div>
+                    <div className="text-center py-10 text-slate-500 text-sm">Belum ada peserta terdaftar.</div>
                   ) : (
                     participants.map((p, idx) => (
-                      <div key={idx} className="bg-white/5 border border-white/5 rounded-xl p-4 flex justify-between items-center">
+                      <div key={idx} className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex justify-between items-center shadow-sm">
                         <div className="overflow-hidden">
-                          <p className="text-white font-medium truncate text-sm">{p.nama}</p>
-                          <p className="text-zinc-500 text-xs truncate">{p.email}</p>
+                          <p className="text-slate-900 font-medium truncate text-sm">{p.nama}</p>
+                          <p className="text-slate-500 text-xs truncate">{p.email}</p>
                         </div>
                         <div className="ml-3 shrink-0">
                           {p.status === 'Hadir' ? (
-                            <span className="bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-bold border border-emerald-500/30">
+                            <span className="bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-bold border border-emerald-200">
                               Hadir
                             </span>
                           ) : (
-                            <span className="bg-white/5 text-zinc-400 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-medium border border-white/10">
+                            <span className="bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-medium border border-slate-300">
                               Antri
                             </span>
                           )}
@@ -338,27 +337,27 @@ export default function ScannerPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/60 backdrop-blur-sm"
             >
               <motion.div 
                 initial={{ scale: 0.95 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.95 }}
-                className="bg-[#0C0C14] border border-white/10 p-6 rounded-3xl w-full max-w-sm shadow-2xl"
+                className="bg-white border border-slate-200 p-6 rounded-3xl w-full max-w-sm shadow-2xl"
               >
-                <h3 className="text-xl font-bold text-white mb-4">Input ID Tiket Manual</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">Input ID Tiket Manual</h3>
                 <input 
                   type="text" 
                   value={manualId}
                   onChange={e => setManualId(e.target.value)}
                   placeholder="Masukkan ID Tiket..."
-                  className="w-full glass-input px-4 py-3 rounded-xl mb-4 text-white placeholder:text-zinc-500"
+                  className="w-full glass-input bg-slate-50 border-slate-200 px-4 py-3 rounded-xl mb-4 text-slate-900 placeholder:text-slate-400"
                   autoFocus
                 />
                 <div className="flex gap-3">
                   <button 
                     onClick={() => setShowManualInput(false)}
-                    className="flex-1 bg-white/5 text-white py-3 rounded-xl hover:bg-white/10 transition-colors font-medium"
+                    className="flex-1 bg-slate-100 border border-slate-200 text-slate-700 py-3 rounded-xl hover:bg-slate-200 transition-colors font-medium"
                   >
                     Batal
                   </button>
@@ -366,7 +365,7 @@ export default function ScannerPage() {
                     onClick={() => {
                       if (manualId.trim()) processTicket(manualId.trim());
                     }}
-                    className="flex-1 bg-yellow-500 text-black py-3 rounded-xl hover:bg-yellow-400 transition-colors font-bold shadow-[0_0_20px_rgba(234,179,8,0.3)]"
+                    className="flex-1 bg-slate-900 text-white py-3 rounded-xl hover:bg-slate-800 transition-colors font-bold shadow-md"
                   >
                     Validasi
                   </button>
@@ -376,7 +375,7 @@ export default function ScannerPage() {
           )}
         </AnimatePresence>
 
-        <p className="text-center text-zinc-600 text-xs mt-8 font-medium tracking-wide">
+        <p className="text-center text-slate-400 text-xs mt-8 font-medium tracking-wide">
           Secured by Tactlink Technology
         </p>
 

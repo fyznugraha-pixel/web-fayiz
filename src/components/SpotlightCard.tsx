@@ -49,13 +49,13 @@ export const SpotlightCard = ({
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl transition-all ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-slate-200/50 bg-white/90 backdrop-blur-md shadow-2xl transition-all ${className}`}
     >
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
         style={{
           opacity,
-          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(0,242,254,0.15), transparent 40%)`,
+          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(14,165,233,0.08), transparent 40%)`,
         }}
       />
       {children}
