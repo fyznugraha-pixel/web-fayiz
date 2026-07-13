@@ -185,7 +185,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Tanggal & Waktu</h3>
-                  <p className="text-slate-500 dark:text-zinc-400 mt-1">Kamis, 23 Juli 2026 <br/> 09.00 WIB - Selesai</p>
+                  <p className="text-slate-500 dark:text-zinc-400 mt-1">Kamis, 23 Juli 2026 <br/> 08.00 WIB - Selesai</p>
                 </div>
               </div>
               
@@ -315,34 +315,34 @@ export default function Home() {
 
                           <div className="space-y-1.5">
                             <label className="text-sm font-medium text-slate-700 dark:text-zinc-300 ml-1">Nama Lengkap Sesuai KTP <span className="text-secondary">*</span></label>
-                            <input type="text" name={`fullName_${i}`} required className="w-full glass-input dark:bg-white/5 dark:text-white px-4 py-3.5" placeholder="Contoh: Fayiz Apriwansyah" />
+                            <input type="text" name={`fullName_${i}`} required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: Fayiz Apriwansyah" />
                           </div>
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div className="space-y-1.5">
                               <label className="text-sm font-medium text-slate-700 dark:text-zinc-300 ml-1">Alamat Email <span className="text-secondary">*</span></label>
-                              <input type="email" name={`email_${i}`} required className="w-full glass-input dark:bg-white/5 dark:text-white px-4 py-3.5" placeholder="Contoh: fyznugraha@email.com" />
+                              <input type="email" name={`email_${i}`} required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: fyznugraha@email.com" />
                             </div>
                             <div className="space-y-1.5">
                               <label className="text-sm font-medium text-slate-700 dark:text-zinc-300 ml-1">No. WhatsApp Aktif <span className="text-secondary">*</span></label>
-                              <input type="tel" name={`whatsapp_${i}`} required className="w-full glass-input dark:bg-white/5 dark:text-white px-4 py-3.5" placeholder="Contoh: 087794693241" />
+                              <input type="tel" name={`whatsapp_${i}`} required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: 087794693241" />
                             </div>
                           </div>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div className="space-y-1.5">
                               <label className="text-sm font-medium text-slate-700 dark:text-zinc-300 ml-1">Username TikTok <span className="text-secondary">*</span></label>
-                              <input type="text" name={`tiktokUsername_${i}`} required className="w-full glass-input dark:bg-white/5 dark:text-white px-4 py-3.5" placeholder="Contoh: @faizngraha" />
+                              <input type="text" name={`tiktokUsername_${i}`} required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: @faizngraha" />
                             </div>
                             <div className="space-y-1.5">
                               <label className="text-sm font-medium text-slate-700 dark:text-zinc-300 ml-1">Jumlah Followers <span className="text-secondary">*</span></label>
-                              <input type="number" name={`followers_${i}`} required className="w-full glass-input dark:bg-white/5 dark:text-white px-4 py-3.5" placeholder="Contoh: 1500" />
+                              <input type="number" name={`followers_${i}`} required className="w-full glass-input px-4 py-3.5" placeholder="Contoh: 1500" />
                             </div>
                           </div>
 
                           <div className="space-y-1.5">
                             <label className="text-sm font-medium text-slate-700 dark:text-zinc-300 ml-1">Link Akun TikTok <span className="text-secondary">*</span></label>
-                            <input type="url" name={`tiktokLink_${i}`} required className="w-full glass-input dark:bg-white/5 dark:text-white px-4 py-3.5" placeholder="https://tiktok.com/@faizngraha" />
+                            <input type="url" name={`tiktokLink_${i}`} required className="w-full glass-input px-4 py-3.5" placeholder="https://tiktok.com/@faizngraha" />
                           </div>
                         </div>
                       ))}
