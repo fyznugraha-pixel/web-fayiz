@@ -14,7 +14,55 @@ export default function ScannerPage() {
   const [lastScannedId, setLastScannedId] = useState<string | null>(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [scannedCount, setScannedCount] = useState(0);
+  const [showManualInput, setShowManualInput] = useState(false);
+  const [manualId, setManualId] = useState('');
   const scannerRef = useRef<Html5Qrcode | null>(null);
+
+  const processTicket = async (ticketId: string) => {
+    if (ticketId === lastScannedId && scanStatus !== 'idle') return;
+    
+    setLastScannedId(ticketId);
+    setScanStatus('loading');
+    setScannedName(null);
+    setShowManualInput(false);
+    setManualId('');
+
+    if (scannerRef.current?.isScanning) {
+      await scannerRef.current.pause();
+    }
+
+    try {
+      const response = await fetch('/api/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ticketId })
+      });
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        setScanStatus('success');
+        setScannedName(result.nama);
+        setScannedCount(prev => prev + 1);
+      } else if (result.status === 'already_scanned') {
+        setScanStatus('already_scanned');
+        setScannedName(result.nama);
+      } else {
+        setScanStatus('invalid');
+      }
+    } catch (err) {
+      console.error(err);
+      setScanStatus('error');
+    }
+
+    setTimeout(() => {
+      setScanStatus('idle');
+      setLastScannedId(null);
+      if (scannerRef.current?.isScanning) {
+        scannerRef.current.resume();
+      }
+    }, 4000);
+  };
 
   useEffect(() => {
     // Cleanup on unmount
@@ -35,47 +83,7 @@ export default function ScannerPage() {
         { facingMode: "environment" },
         { fps: 10, qrbox: { width: 250, height: 250 } },
         async (decodedText) => {
-          if (decodedText === lastScannedId && scanStatus !== 'idle') return;
-          
-          setLastScannedId(decodedText);
-          setScanStatus('loading');
-          setScannedName(null);
-
-          if (scannerRef.current?.isScanning) {
-            await scannerRef.current.pause();
-          }
-
-          try {
-            const response = await fetch('/api/validate', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ ticketId: decodedText })
-            });
-
-            const result = await response.json();
-            
-            if (result.status === 'success') {
-              setScanStatus('success');
-              setScannedName(result.nama);
-              setScannedCount(prev => prev + 1);
-            } else if (result.status === 'already_scanned') {
-              setScanStatus('already_scanned');
-              setScannedName(result.nama);
-            } else {
-              setScanStatus('invalid');
-            }
-          } catch (err) {
-            console.error(err);
-            setScanStatus('error');
-          }
-
-          setTimeout(() => {
-            setScanStatus('idle');
-            setLastScannedId(null);
-            if (scannerRef.current?.isScanning) {
-              scannerRef.current.resume();
-            }
-          }, 4000);
+          await processTicket(decodedText);
         },
         (errorMessage) => {
           // parse errors are ignored
@@ -220,16 +228,67 @@ export default function ScannerPage() {
 
         {/* Bottom Actions */}
         <div className="mt-6 grid grid-cols-2 gap-3">
-          <button className="bg-white/5 border border-white/10 text-white font-medium py-3.5 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm shadow-lg">
+          <button 
+            onClick={() => alert('Daftar peserta lengkap dapat dilihat melalui Dashboard Google Sheets Anda.')}
+            className="bg-white/5 border border-white/10 text-white font-medium py-3.5 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm shadow-lg"
+          >
             <Users className="w-4 h-4 text-zinc-400" />
             Daftar Peserta
           </button>
-          <button className="bg-white/5 border border-white/10 text-white font-medium py-3.5 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm shadow-lg">
+          <button 
+            onClick={() => setShowManualInput(true)}
+            className="bg-white/5 border border-white/10 text-white font-medium py-3.5 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm shadow-lg"
+          >
             <Keyboard className="w-4 h-4 text-zinc-400" />
             Input Manual
           </button>
         </div>
         
+        {/* Manual Input Modal */}
+        <AnimatePresence>
+          {showManualInput && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            >
+              <motion.div 
+                initial={{ scale: 0.95 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.95 }}
+                className="bg-[#0C0C14] border border-white/10 p-6 rounded-3xl w-full max-w-sm shadow-2xl"
+              >
+                <h3 className="text-xl font-bold text-white mb-4">Input ID Tiket Manual</h3>
+                <input 
+                  type="text" 
+                  value={manualId}
+                  onChange={e => setManualId(e.target.value)}
+                  placeholder="Masukkan ID Tiket..."
+                  className="w-full glass-input px-4 py-3 rounded-xl mb-4 text-white placeholder:text-zinc-500"
+                  autoFocus
+                />
+                <div className="flex gap-3">
+                  <button 
+                    onClick={() => setShowManualInput(false)}
+                    className="flex-1 bg-white/5 text-white py-3 rounded-xl hover:bg-white/10 transition-colors font-medium"
+                  >
+                    Batal
+                  </button>
+                  <button 
+                    onClick={() => {
+                      if (manualId.trim()) processTicket(manualId.trim());
+                    }}
+                    className="flex-1 bg-yellow-500 text-black py-3 rounded-xl hover:bg-yellow-400 transition-colors font-bold shadow-[0_0_20px_rgba(234,179,8,0.3)]"
+                  >
+                    Validasi
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <p className="text-center text-zinc-600 text-xs mt-8 font-medium tracking-wide">
           Secured by Tactlink Technology
         </p>
