@@ -197,6 +197,7 @@ export default function Home() {
                   <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Lokasi</h3>
                   <p className="text-slate-500 dark:text-zinc-400 mt-1 text-sm leading-relaxed">
                     <a href="https://maps.app.goo.gl/GLC7gKbRhENe12tE6" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:underline">
+                      <strong>Evermos Center</strong><br/>
                       Jl. Dago No.95, Lb. Siliwangi,<br/>
                       Kecamatan Coblong, Kota Bandung,<br/>
                       Jawa Barat 40132
