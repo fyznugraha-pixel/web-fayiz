@@ -21,6 +21,10 @@ function doPost(e) {
       return handleValidation(data);
     } else if (data.action === "getParticipants") {
       return handleGetParticipants();
+    } else if (data.action === "getAdminData") {
+      return handleGetAdminData();
+    } else if (data.action === "updatePaymentStatus") {
+      return handleUpdatePaymentStatus(data);
     }
     
     return handleRegistration(data);
@@ -134,7 +138,7 @@ function handleRegistration(data) {
     sheet = spreadsheet.getActiveSheet();
     
     // Buat Header Row
-    var headers = ["Ticket ID", "Timestamp", "Nama Lengkap", "Email", "No Whatsapp", "Username TikTok", "Link TikTok", "Jumlah Followers", "URL Bukti Pembayaran", "Status Kehadiran", "Waktu Check-in"];
+    var headers = ["Ticket ID", "Timestamp", "Nama Lengkap", "Email", "No Whatsapp", "Username TikTok", "Link TikTok", "Jumlah Followers", "URL Bukti Pembayaran", "Status Kehadiran", "Waktu Check-in", "Status Pembayaran"];
     sheet.appendRow(headers);
     
     var headerRange = sheet.getRange(1, 1, 1, headers.length);
@@ -144,25 +148,67 @@ function handleRegistration(data) {
     sheet.setFrozenRows(1);
   }
   
-  // Generate Ticket ID Unik
-  var timestamp = Math.floor(Date.now() / 1000);
-  var randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
-  var ticketId = "TK-" + timestamp + "-" + randomStr;
-
-  // Tambahkan data pendaftar ke baris baru
-  sheet.appendRow([
-    ticketId,
-    new Date(),
-    data.fullName,
-    data.email,
-    data.whatsapp,
-    data.tiktokUsername,
-    data.tiktokLink,
-    data.followers,
-    fileUrl,
-    "", // Status Kehadiran awal kosong
-    ""  // Waktu check-in awal kosong
-  ]);
+  var tickets = [];
+  
+  if (data.participants && Array.isArray(data.participants)) {
+    for (var i = 0; i < data.participants.length; i++) {
+      var p = data.participants[i];
+      // Generate Ticket ID Unik
+      var timestamp = Math.floor(Date.now() / 1000);
+      var randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+      var ticketId = "TK-" + timestamp + "-" + randomStr;
+      
+      sheet.appendRow([
+        ticketId,
+        new Date(),
+        p.fullName,
+        p.email,
+        p.whatsapp,
+        p.tiktokUsername,
+        p.tiktokLink,
+        p.followers,
+        fileUrl,
+        "", // Status Kehadiran awal kosong
+        "", // Waktu check-in awal kosong
+        "Pending" // Status Pembayaran awal
+      ]);
+      
+      tickets.push({
+        ticketId: ticketId,
+        email: p.email,
+        fullName: p.fullName
+      });
+      
+      // Kasih delay kecil agar timestamp dan random string lebih terjamin beda
+      Utilities.sleep(50);
+    }
+  } else {
+    // Fallback kalau format lama
+    var timestamp = Math.floor(Date.now() / 1000);
+    var randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+    var ticketId = "TK-" + timestamp + "-" + randomStr;
+    
+    sheet.appendRow([
+      ticketId,
+      new Date(),
+      data.fullName,
+      data.email,
+      data.whatsapp,
+      data.tiktokUsername,
+      data.tiktokLink,
+      data.followers,
+      fileUrl,
+      "", 
+      "",
+      "Pending"
+    ]);
+    
+    tickets.push({
+      ticketId: ticketId,
+      email: data.email,
+      fullName: data.fullName
+    });
+  }
   
   sheet.autoResizeColumns(1, 11);
   
@@ -171,7 +217,7 @@ function handleRegistration(data) {
     "status": "success",
     "message": "Data dan file berhasil disimpan",
     "fileUrl": fileUrl,
-    "ticketId": ticketId
+    "tickets": tickets
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
@@ -218,5 +264,112 @@ function handleGetParticipants() {
   return ContentService.createTextOutput(JSON.stringify({
     "status": "success",
     "participants": participants
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function handleGetAdminData() {
+  var sheetName = "Data Pendaftar Event";
+  var files = DriveApp.getFilesByName(sheetName);
+  
+  if (!files.hasNext()) {
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "error",
+      "message": "Database Spreadsheet belum dibuat"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var spreadsheet = SpreadsheetApp.open(files.next());
+  var sheet = spreadsheet.getActiveSheet();
+  var dataRange = sheet.getDataRange();
+  var values = dataRange.getValues();
+  
+  if (values.length <= 1) {
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "success",
+      "participants": []
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var headers = values[0];
+  var paymentStatusColIdx = headers.indexOf("Status Pembayaran");
+  var buktiUrlColIdx = headers.indexOf("URL Bukti Pembayaran");
+  var attendanceColIdx = headers.indexOf("Status Kehadiran");
+  
+  // Jika kolom Status Pembayaran belum ada, buat
+  if (paymentStatusColIdx === -1) {
+    paymentStatusColIdx = headers.length;
+    sheet.getRange(1, paymentStatusColIdx + 1).setValue("Status Pembayaran").setBackground("#f59e0b").setFontColor("white").setFontWeight("bold");
+  }
+  
+  var participants = [];
+  for (var i = 1; i < values.length; i++) {
+    var row = values[i];
+    participants.push({
+      ticketId: row[0] || "",
+      timestamp: row[1] ? new Date(row[1]).toISOString() : "",
+      fullName: row[2] || "",
+      email: row[3] || "",
+      whatsapp: row[4] || "",
+      buktiUrl: buktiUrlColIdx !== -1 ? (row[buktiUrlColIdx] || "") : "",
+      statusPembayaran: paymentStatusColIdx !== -1 ? (row[paymentStatusColIdx] || "Pending") : "Pending",
+      statusKehadiran: attendanceColIdx !== -1 ? (row[attendanceColIdx] || "") : ""
+    });
+  }
+  
+  participants.reverse();
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    "status": "success",
+    "participants": participants
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function handleUpdatePaymentStatus(data) {
+  var sheetName = "Data Pendaftar Event";
+  var files = DriveApp.getFilesByName(sheetName);
+  
+  if (!files.hasNext()) {
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "error",
+      "message": "Database Spreadsheet belum dibuat"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var spreadsheet = SpreadsheetApp.open(files.next());
+  var sheet = spreadsheet.getActiveSheet();
+  var dataRange = sheet.getDataRange();
+  var values = dataRange.getValues();
+  
+  if (values.length <= 1) {
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "error",
+      "message": "Belum ada data"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var headers = values[0];
+  var paymentStatusColIdx = headers.indexOf("Status Pembayaran");
+  
+  if (paymentStatusColIdx === -1) {
+    paymentStatusColIdx = headers.length;
+    sheet.getRange(1, paymentStatusColIdx + 1).setValue("Status Pembayaran").setBackground("#f59e0b").setFontColor("white").setFontWeight("bold");
+  }
+  
+  var ticketId = data.ticketId;
+  
+  for (var i = 1; i < values.length; i++) {
+    if (values[i][0] === ticketId) {
+      sheet.getRange(i + 1, paymentStatusColIdx + 1).setValue("Lunas");
+      
+      return ContentService.createTextOutput(JSON.stringify({
+        "status": "success",
+        "message": "Status pembayaran berhasil diupdate"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    "status": "error",
+    "message": "Ticket ID tidak ditemukan"
   })).setMimeType(ContentService.MimeType.JSON);
 }
