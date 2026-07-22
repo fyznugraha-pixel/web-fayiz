@@ -118,24 +118,35 @@ export default function ScannerPage() {
 
   const startScanner = async () => {
     try {
-      if (!scannerRef.current) {
-        scannerRef.current = new Html5Qrcode("reader");
-      }
-
-      await scannerRef.current.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        async (decodedText) => {
-          await processTicket(decodedText);
-        },
-        (errorMessage) => {
-          // parse errors are ignored
+      setIsCameraActive(true); // Tampilkan elemen div #reader terlebih dahulu agar tidak error saat inisialisasi
+      
+      // Beri sedikit jeda agar React merender div-nya (menghapus class 'hidden')
+      setTimeout(async () => {
+        if (!scannerRef.current) {
+          scannerRef.current = new Html5Qrcode("reader");
         }
-      );
-      setIsCameraActive(true);
+
+        try {
+          await scannerRef.current.start(
+            { facingMode: "environment" },
+            { fps: 10, qrbox: { width: 250, height: 250 } },
+            async (decodedText) => {
+              await processTicket(decodedText);
+            },
+            (errorMessage) => {
+              // parse errors are ignored
+            }
+          );
+        } catch (err) {
+          console.error("Failed to start scanner inside timeout", err);
+          setIsCameraActive(false);
+          alert("Gagal mengakses kamera. Pastikan Anda telah memberikan izin kamera atau akses via HTTPS/localhost.");
+        }
+      }, 100);
     } catch (err) {
       console.error("Failed to start scanner", err);
-      alert("Gagal mengakses kamera. Pastikan Anda telah memberikan izin kamera.");
+      setIsCameraActive(false);
+      alert("Gagal mengakses kamera.");
     }
   };
 
